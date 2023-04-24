@@ -5,6 +5,8 @@ using System.Security.Claims;
 
 namespace Serdiuk.NoteApp.Infrastructure.Base
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class BaseApiController : ControllerBase
     {
         private IMediator _mediator;

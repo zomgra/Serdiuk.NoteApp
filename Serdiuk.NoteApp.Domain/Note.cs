@@ -36,7 +36,6 @@ namespace Serdiuk.NoteApp.Domain
             Details = details;
             CreateDate = createDate;
             EditDate = editDate;
-            IsEdited = isEdited;
         }
         /// <summary>
         /// .ctor
