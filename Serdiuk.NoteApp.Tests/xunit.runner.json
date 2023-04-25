@@ -1,0 +1,8 @@
+{
+	"shadowCopy": false,
+	"methodDisplay": "method",
+	"parallelizeAssembly": false,
+	"parallelizeTestCollections": false,
+	"diagnosticMessages": true,
+	"stopOnFail": true
+}

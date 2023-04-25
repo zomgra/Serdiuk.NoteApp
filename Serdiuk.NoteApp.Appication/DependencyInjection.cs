@@ -13,7 +13,7 @@ namespace Serdiuk.NoteApp.Appication
                 o.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly());
             });
 
-            services.AddAutoMapper(typeof(ApplicationMapping));
+            services.AddAutoMapper(typeof(ApplicationMapper));
 
             return services;
         }

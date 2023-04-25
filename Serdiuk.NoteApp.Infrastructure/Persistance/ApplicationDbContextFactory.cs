@@ -16,8 +16,16 @@ namespace Serdiuk.NoteApp.Infrastructure.Persistance
         public static readonly Guid UserA = new("9D9FC0AA-5A03-41E8-94A6-AC50FC291F51");
         public static readonly Guid UserB = new("180FE5BB-5C4D-4072-BE40-D93947FC7F29");
         public static readonly Guid UserC = Guid.NewGuid();
+
         #endregion
-        public static void Initialize(ApplicationDbContext context)
+
+        public static void Destroy(ApplicationDbContext context)
+        {
+            context.Database.EnsureDeleted();
+            context.Dispose();
+        }
+
+        public static ApplicationDbContext Initialize(ApplicationDbContext context)
         {
             var notes = new List<Note>
             {
@@ -30,7 +38,7 @@ namespace Serdiuk.NoteApp.Infrastructure.Persistance
                 },
                 new Note
                 {
-                    UserId = UserA,
+                    UserId = UserB,
                     Title = TitleB,
                     Details = DescriptionB,
                     CreateDate = new DateTime(2023,04,23),
@@ -49,6 +57,7 @@ namespace Serdiuk.NoteApp.Infrastructure.Persistance
                 context.AddRange(notes);
                 context.SaveChanges();
             }
+            return context;
         }
     }
 }

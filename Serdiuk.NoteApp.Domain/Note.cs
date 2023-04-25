@@ -13,6 +13,9 @@ namespace Serdiuk.NoteApp.Domain
         /// </summary>
         public Note(Guid userId, string title, string details)
         {
+            if (string.IsNullOrEmpty(details) && string.IsNullOrEmpty(title))
+                throw new ArgumentNullException(nameof(details) + " and " + nameof(title));
+
             UserId = userId;
             Title = title;
             Details = details;
@@ -72,10 +75,14 @@ namespace Serdiuk.NoteApp.Domain
         /// <summary>
         /// Flag, is edit
         /// </summary>
-        public bool IsEdited { get { return EditDate == default ? false : true; } }
+        public bool IsEdited { get { return EditDate != null && EditDate != default(DateTime); } }
+
 
         public Result<int> Edit(string? title, string? details)
         {
+            if (string.IsNullOrEmpty(details) && string.IsNullOrEmpty(title))
+               return Result.Fail("Title and Details is empty");
+
             Title = title;
             Details = details;
             EditDate = DateTime.UtcNow;

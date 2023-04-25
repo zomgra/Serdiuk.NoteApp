@@ -3,9 +3,9 @@ using Serdiuk.NoteApp.Domain;
 
 namespace Serdiuk.NoteApp.Appication.Common.Mapping
 {
-    public class ApplicationMapping : Profile
+    public class ApplicationMapper : Profile
     {
-        public ApplicationMapping()
+        public ApplicationMapper()
         {
             CreateMap<Note, NoteDto>()
                 .ForMember(d => d.Id, o => o.MapFrom(n => n.Id))

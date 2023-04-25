@@ -16,12 +16,20 @@ namespace Serdiuk.NoteApp.Appication.Notes.Create
 
         public async Task<Result<int>> Handle(CreateNoteCommand request, CancellationToken cancellationToken)
         {
-            var note = new Note(request.UserId, request.Title, request.Details);
+            try
+            {
+                var note = new Note(request.UserId, request.Title, request.Details);
 
-            await _context.Notes.AddAsync(note);
-            await _context.SaveChangesAsync(cancellationToken);
+                await _context.Notes.AddAsync(note);
+                await _context.SaveChangesAsync(cancellationToken);
 
-            return note.Id;
+                return note.Id;
+            }
+            catch (Exception e)
+            {
+                return Result.Fail(e.Message);
+            }
+
         }
     }
 }
