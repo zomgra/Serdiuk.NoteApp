@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serdiuk.NoteApp.Appication;
@@ -30,7 +29,7 @@ builder.Services.AddSwaggerGen(options =>
         Description = "This is Notes API",
         Version = "1",
         Title = "NOTES API",
-    }) ;
+    });
 
 
     var url = builder.Configuration.GetValue<string>("AuthServer:Url");
@@ -39,6 +38,8 @@ builder.Services.AddSwaggerGen(options =>
         Description = "JWT Authorization header using the Bearer scheme",
         Name = "Authorization",
         Type = SecuritySchemeType.OAuth2,
+        In = ParameterLocation.Header,
+        BearerFormat = "JWT",
         Flows = new OpenApiOAuthFlows
         {
             Password = new OpenApiOAuthFlow
@@ -48,10 +49,28 @@ builder.Services.AddSwaggerGen(options =>
                 Scopes = new Dictionary<string, string>
                 {
                     { "NotesApi", "Notes Api" }
-                },   
+                },
             }
-        }
+        },
     });
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "oauth2"
+                    },
+                    Scheme = "oauth2",
+                    Name = "Bearer",
+                    In = ParameterLocation.Header
+                },
+                new List<string>()
+            }
+    }
+);
 });
 
 builder.Services.AddApplication();
