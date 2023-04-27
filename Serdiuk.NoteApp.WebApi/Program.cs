@@ -97,7 +97,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseMiddleware<RequestRateLimitMiddleware>(10, TimeSpan.FromMinutes(1));
+app.UseMiddleware<RequestRateLimitMiddleware>(100, TimeSpan.FromMinutes(1));
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -31,7 +31,7 @@ namespace Serdiuk.NoteApp.Domain
         /// <param name="createDate"></param>
         /// <param name="editDate"></param>
         /// <param name="isEdited"></param>
-        public Note(int id, Guid userId, string title, string details, DateTime createDate, DateTime? editDate, bool isEdited)
+        public Note(int id, Guid userId, string title, string details, DateTime createDate, DateTime? editDate)
         {
             Id = id;
             UserId = userId;
@@ -77,14 +77,19 @@ namespace Serdiuk.NoteApp.Domain
         /// </summary>
         public bool IsEdited { get { return EditDate != null && EditDate != default(DateTime); } }
 
-
+        /// <summary>
+        /// Edit title and details note
+        /// </summary>
+        /// <param name="title">New title</param>
+        /// <param name="details">New Details</param>
+        /// <returns>Result</returns>
         public Result<int> Edit(string? title, string? details)
         {
-            if (string.IsNullOrEmpty(details) && string.IsNullOrEmpty(title))
+            if (string.IsNullOrWhiteSpace(details) && string.IsNullOrWhiteSpace(title))
                return Result.Fail("Title and Details is empty");
 
-            Title = title;
-            Details = details;
+            Title = !string.IsNullOrWhiteSpace(title) ? title : Title;
+            Details = !string.IsNullOrWhiteSpace(details) ? details : Details;
             EditDate = DateTime.UtcNow;
             return Result.Ok(Id);
         }

@@ -18,7 +18,7 @@ namespace Serdiuk.NoteApp.Appication.Notes.Delete
         {
             var note = await _context.Notes.FirstOrDefaultAsync(n => n.Id == request.Id, cancellationToken);
 
-            if (note == null || note.UserId == request.UserId)
+            if (note == null || note.UserId != request.UserId)
                 return Result.Fail("Not not found or you dont have permissions");
 
             _context.Notes.Remove(note);

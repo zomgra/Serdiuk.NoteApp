@@ -22,7 +22,7 @@ namespace Serdiuk.NoteApp.Appication.Notes.GetById
         {
             var note = await _context.Notes.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
 
-            if (note == null || note.UserId == request.UserId)
+            if (note == null || note.UserId != request.UserId)
                 return Result.Fail("Not not found or you dont have permissions");
 
             return _mapper.Map<NoteDto>(note).ToResult();

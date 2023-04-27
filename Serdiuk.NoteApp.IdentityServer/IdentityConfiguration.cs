@@ -22,29 +22,24 @@ namespace Serdiuk.NoteApp.IdentityServer
             {
                 RedirectUris = { "http://localhost:3000/signin-oidc" },
                 AllowedGrantTypes = GrantTypes.Implicit,
-                ClientId = "client_id_notes",
-                ClientName = "NotesApi",
-                ClientSecrets = { new Secret("client_secret_notes".ToSha256()) },
+                ClientId = "client_id_react",
                 RequireClientSecret = false,
                 RequirePkce = true,
-                AlwaysSendClientClaims = true,
-                AlwaysIncludeUserClaimsInIdToken = true,
                 AllowedScopes =
-            {
-                "NotesApi",
-                IdentityServerConstants.StandardScopes.OpenId,
-                IdentityServerConstants.StandardScopes.Email,
-                IdentityServerConstants.StandardScopes.Profile,
-            },
-                IncludeJwtId = true,
+                {   
+                    "NotesApi",
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Email,
+                    IdentityServerConstants.StandardScopes.Profile,
+                },
                 AllowedCorsOrigins =
-            {
-                "http://localhost:3000"
-            },
+                {
+                    "http://localhost:3000"
+                },
                 PostLogoutRedirectUris =
-            {
-                "http://localhost:3000/signout-oidc"
-            },
+                {
+                    "http://localhost:3000/signout-oidc"
+                },
                 AllowAccessTokensViaBrowser = true,
                 AllowOfflineAccess = true,
             };
