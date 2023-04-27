@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Serdiuk.NoteApp.Appication.Notes.Create;
 using Serdiuk.NoteApp.Appication.Notes.Delete;
 using Serdiuk.NoteApp.Appication.Notes.Edit;
@@ -8,6 +9,7 @@ using Serdiuk.NoteApp.Infrastructure.Base;
 
 namespace Serdiuk.NoteApp.WebApi.Controllers
 {
+    [Authorize]
     public class NoteController : BaseApiController
     {
         [HttpGet("{id}")]
