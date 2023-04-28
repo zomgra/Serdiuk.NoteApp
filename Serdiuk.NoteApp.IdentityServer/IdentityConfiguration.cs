@@ -1,6 +1,7 @@
 ﻿using IdentityServer4.Models;
 using IdentityServer4;
 using IdentityModel;
+using static System.Net.WebRequestMethods;
 
 namespace Serdiuk.NoteApp.IdentityServer
 {
@@ -21,6 +22,7 @@ namespace Serdiuk.NoteApp.IdentityServer
             yield return new Client()
             {
                 RedirectUris = { "http://localhost:3000/signin-oidc" },
+                
                 AllowedGrantTypes = GrantTypes.Implicit,
                 ClientId = "client_id_react",
                 RequireClientSecret = false,

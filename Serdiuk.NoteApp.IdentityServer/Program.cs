@@ -23,7 +23,7 @@ builder.Services.AddDbContext<AuthDbContext>(config =>
     config.UseInMemoryDatabase("MEMORY");
 })
                 .AddIdentity<IdentityUser, IdentityRole>(config =>
-                {
+                { 
                     config.Password.RequireDigit = false;
                     config.Password.RequireLowercase = false;
                     config.Password.RequireNonAlphanumeric = false;
@@ -34,6 +34,8 @@ builder.Services.AddDbContext<AuthDbContext>(config =>
                 .AddDefaultTokenProviders();
 
 
+
+
 builder.Services.AddIdentityServer()
     .AddAspNetIdentity<IdentityUser>()
     .AddInMemoryApiResources(IdentityConfiguration.ApiResources())
@@ -42,6 +44,10 @@ builder.Services.AddIdentityServer()
     .AddInMemoryClients(IdentityConfiguration.Clients())
     .AddDeveloperSigningCredential();
 
+builder.Services.ConfigureApplicationCookie(config =>
+{
+    config.LoginPath = "/Auth/Login";
+});
 
 var app = builder.Build();
 

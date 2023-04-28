@@ -21,7 +21,7 @@ namespace Serdiuk.NoteApp.IdentityServer.Controllers
             return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
         [HttpPost]
-        public async Task<IActionResult> LoginAsync(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid) return View(model);
 

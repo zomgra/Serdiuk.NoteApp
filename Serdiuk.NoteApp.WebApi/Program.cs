@@ -9,6 +9,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+builder.Services.AddCors(b =>
+{
+    b.AddDefaultPolicy(p =>
+    {
+        p.AllowAnyMethod()
+        .AllowCredentials()
+        .AllowAnyHeader()
+        .WithOrigins("http://localhost:3000");
+    });
+});
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, config =>
     {
@@ -95,6 +106,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseCors();
 app.UseHttpsRedirection();
 
 app.UseMiddleware<RequestRateLimitMiddleware>(100, TimeSpan.FromMinutes(1));
