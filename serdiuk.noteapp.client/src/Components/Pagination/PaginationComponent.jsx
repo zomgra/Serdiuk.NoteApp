@@ -1,21 +1,22 @@
 import React from 'react'
 
 const PaginationComponent = ({ currentPage, totalPages, onPageChange }) => {
-    const pages = [];
+  const pages = [];
 
-    // создаем список страниц
-    for (let i = 1; i <= totalPages; i++) {
-      pages.push(
-        <li className={`page-item ${i === currentPage ? "active" : ""}`} key={i}>
-          <button className="page-link" onClick={() => onPageChange(i)}>
-            {i}
-          </button>
-        </li>
-      );
-    }
-  
-    return (
-      <nav aria-label="Page navigation">
+  // создаем список страниц
+  for (let i = 1; i <= totalPages; i++) {
+    pages.push(
+      <li className={`page-item ${i === currentPage ? "active" : ""}`} key={i}>
+        <button className="page-link" onClick={() => onPageChange(i)}>
+          {i}
+        </button>
+      </li>
+    );
+  }
+
+  return (
+    <div className='d-flex justify-content-center fixed-bottom'>
+      <nav aria-label="Page navigation" className=''>
         <ul className="pagination">
           <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
             <button
@@ -28,9 +29,8 @@ const PaginationComponent = ({ currentPage, totalPages, onPageChange }) => {
           </li>
           {pages}
           <li
-            className={`page-item ${
-              currentPage === totalPages ? "disabled" : ""
-            }`}
+            className={`page-item ${currentPage === totalPages ? "disabled" : ""
+              }`}
           >
             <button
               className="page-link"
@@ -41,7 +41,8 @@ const PaginationComponent = ({ currentPage, totalPages, onPageChange }) => {
           </li>
         </ul>
       </nav>
-    );
+    </div>
+  );
 }
 
 export default PaginationComponent

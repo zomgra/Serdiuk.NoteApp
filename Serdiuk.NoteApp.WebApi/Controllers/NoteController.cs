@@ -53,7 +53,7 @@ namespace Serdiuk.NoteApp.WebApi.Controllers
             return Ok(result.Value);
         }
         [HttpDelete]
-        public async Task<IActionResult> DeleteNote(DeleteNoteCommandDto request, CancellationToken cancellationToken)
+        public async Task<IActionResult> DeleteNote([FromQuery]DeleteNoteCommandDto request, CancellationToken cancellationToken)
         {
             var result = await Mediator.Send(new DeleteNoteCommand { UserId = UserId, Id = request.Id }, cancellationToken);
 
