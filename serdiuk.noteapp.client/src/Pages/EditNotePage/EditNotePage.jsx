@@ -28,8 +28,10 @@ const EditNotePage = () => {
     return(<>LOADING</>)
 
     return (
-        <div>
+        <div className='m-5 border p-3' style={{ textAlign: 'center',}}>
+
             <BackToHomeButton/>
+            <h3>Edit Note</h3>
             <NoteViewEdit applyEditHandle={applyEditHandle} note={note}/>
         </div>
     )
